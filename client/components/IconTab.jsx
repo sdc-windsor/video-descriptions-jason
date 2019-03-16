@@ -23,7 +23,6 @@ class IconTab extends React.Component {
 
     shortenNum(num) {
         const stringifiedNum = typeof num === 'string' ? num : JSON.stringify(num);
-        console.log(stringifiedNum)
         if (stringifiedNum.length >= 7 && stringifiedNum.length < 10) {
             const milDigit = stringifiedNum.slice(0, stringifiedNum.length - 4);
             return this.convertMilToString(stringifiedNum, milDigit);
@@ -55,7 +54,6 @@ class IconTab extends React.Component {
 
     convertBilToString(stringifiedNum, bilDigit) {
         if (Number(bilDigit[bilDigit.length - 1]) >= 5) {
-            console.log('last digit >5')
             let newNum = Number(bilDigit.slice(0, bilDigit.length - 1)) + 1;
             let newArr = newNum.toString().split('');
             newArr.splice(newArr.length - 1, 0, ".")
@@ -111,27 +109,26 @@ class IconTab extends React.Component {
         id = id.split('/');
         this.getNumOfComments(Number(id[1]));
         this.getNumOfLikes(Number(id[1]));
-        console.log(this.state.numOfLikes, this.state.numOfComments)
     }
 
     render() {
         return (
-            <div style={{ paddingRight: '2%'}}>
+            <div style={{ paddingRight: '2%' }}>
                 <div style={{ float: 'left' }}>
                     <Button style={{ backgroundColor: 'white', borderColor: 'white', width: '8em' }}>
                         <TiMediaPlayOutline style={{ color: 'black', width: '2em', height: '2em' }} />
                         <div style={{ display: 'inline', color: 'black' }}>{
-                                this.props.data.plays===undefined ?
-                                    this.shortenNum(10000000)
-                                    :this.shortenNum(this.props.data.plays)
-                            }</div>
+                            this.props.data.plays === undefined ?
+                                this.shortenNum(10000000)
+                                : this.shortenNum(this.props.data.plays)
+                        }</div>
                     </Button>
                     &nbsp;
                     <Button style={{ backgroundColor: 'white', borderColor: 'white', width: '8em' }}>
                         <TiHeartOutline style={{ color: 'black', width: '1.75em', height: '2em' }} />
-                        <div style={{ display: 'inline', color: 'black' }}>{" " + this.state.numOfLikes===undefined ?
-                                    this.shortenNum(10000000)
-                                    :this.shortenNum(this.state.numOfLikes)}</div>
+                        <div style={{ display: 'inline', color: 'black' }}>{" " + this.state.numOfLikes === undefined ?
+                            this.shortenNum(10000000)
+                            : this.shortenNum(this.state.numOfLikes)}</div>
                     </Button>
                     &nbsp;
                     <Button style={{ backgroundColor: 'white', borderColor: 'white', width: '8em' }}>
@@ -144,7 +141,7 @@ class IconTab extends React.Component {
                         <div style={{ display: 'inline', color: 'black' }}>{" " + this.state.numOfComments}</div>
                     </Button>
                 </div>
-                <div style={{float: 'right' }}>
+                <div style={{ float: 'right' }}>
                     <Button style={{ backgroundColor: 'rgb(238, 241, 242)', borderColor: 'white', width: '7em' }}>
                         <IoIosPaperplaneOutline style={{ color: 'black', width: '1.75em', height: '2em' }} />
                         <div style={{ display: 'inline', color: 'black' }}>{" Share"}</div>

@@ -11,7 +11,7 @@ export default class CommentsList extends React.Component {
             userInfo: [],
             commentList: [],
             newDisplay: [],
-            currentInd:0,
+            currentInd: 0,
             numOfChildren: 5,
             commentToSend: 'Comment'
         }
@@ -21,31 +21,26 @@ export default class CommentsList extends React.Component {
     }
 
     getComments(video_id) {
-        axios.get(`http://localhost:3003/comments/${video_id}`).then((data)=>{
+        axios.get(`http://localhost:3003/comments/${video_id}`).then((data) => {
             this.setState({
-                userInfo: data.data.map((ele)=>{
+                userInfo: data.data.map((ele) => {
                     return ele
                 })
             })
         })
     }
 
-    sendComment(video_id){
+    sendComment(video_id) {
         let data = {
             video_id: video_id,
-            user_id: '5c7af250b5479233947f45c2',
+            user_id: '5c8b1feba0a0f7484fb96fee',
             comment: this.state.commentToSend,
-            date: new Date(),
-            func: () => {
-                console.log('Sent comment to server')
-            }
+            date: new Date()
         }
 
-        axios.post(`http://localhost:3003/comments/${video_id}`, data).then(()=>{
-            console.log('posted')
+        axios.post(`http://localhost:3003/comments/${video_id}`, data).then(() => {
             let id = window.location.pathname;
             id = id.split('/');
-            console.log('Inside client',Number(id[1]));
             this.setState({
                 commentToSend: 'Comment'
             });
@@ -67,16 +62,16 @@ export default class CommentsList extends React.Component {
 
     render() {
         return (
-            <div style={{marginTop:'2em'}}>
+            <div style={{ marginTop: '2em' }}>
                 {
-                    this.state.userInfo.map((ele,i)=>{
+                    this.state.userInfo.map((ele, i) => {
                         return <Comment key={i} userInfo={ele} />
                     })
                 }
                 <AddComment data={descriptions[0]}
-                            sendComment={this.sendComment}
-                            comment={this.state.commentToSend}
-                            updateInput = {this.updateInput} />
+                    sendComment={this.sendComment}
+                    comment={this.state.commentToSend}
+                    updateInput={this.updateInput} />
             </div>
         )
     }

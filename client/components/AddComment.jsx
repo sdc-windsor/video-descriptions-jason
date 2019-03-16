@@ -21,7 +21,7 @@ class AddComment extends React.Component {
     }
 
     componentDidMount() {
-        this.getUserInfo('5c8af5c688b597cb7b7e4658');
+        this.getUserInfo('5c8b1feba0a0f7484fb97005');
     }
 
     render() {

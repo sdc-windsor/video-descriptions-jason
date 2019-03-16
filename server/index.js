@@ -23,6 +23,7 @@ app.get('/categories/:video_id', function (req, res) {
 
 app.get('/usersthumbnail/:user_id', function (req, res) {
     User.findOne({_id: req.params.user_id}).then((data)=>{
+      console.log('data', data);
         res.json(data);
         res.end();
     })
