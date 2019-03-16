@@ -6,9 +6,7 @@ const Comment = require('../database/index').Comment;
 const saveComment = require('../database/helper').saveComment;
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
 
-// const PORT = 8080 || process.env.PORT;
 app.use(bodyParser.json());
 
 app.use(cors());
