@@ -5,22 +5,28 @@ const Description = require('./index.js');
 
 
 /* Attempt to seed using Sequelize -- does not work in time for 10,000,000 records */
-const seedDescriptions = (qty, batches) => {
-  const descriptions = generateDescriptions(qty);
-  let t0;
-  return Description.sync({force: true})
-  .then(() => {
-    t0 = process.hrtime()
-    return Description.bulkCreate(descriptions)
-  })
-  .then(() => {
-    const t2 = process.hrtime(t0);
-    console.log(`Added ${qty} records to the database in ${t2[0]}s ${t2[1]/1000000}ms!`);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+const seedDescriptions = async (qty, batches) => {
+  await Description.sync({force: true});
+  const batchQty = qty / batches;
+  while(batches > 0) {
+    let descriptions = generateDescriptions(batchQty);
+    await Description.bulkCreate(descriptions);
+    batches --;
+  }
 }
+
+
+// const seedDescriptions = (qty, batches) => {
+//   const descriptions = generateDescriptions(qty/batches);
+//   return Description.sync({force: true})
+//   .then(() => {
+//     return Description.bulkCreate(descriptions)
+//   })
+//   .then(() => {
+//     const descriptions = generateDescriptions(qty/batches);
+//     return Description.bulkCreate(descriptions)
+//   })
+// }
 
 /* Using node-postgres instead */
 const { Client } = require('pg');
@@ -53,4 +59,4 @@ const seedDescriptionsPG = async (qty) => {
 
 
 // seedDescriptions(1);
-seedDescriptionsPG(10000000);
+seedDescriptions(10000000, 100);
