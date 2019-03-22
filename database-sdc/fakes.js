@@ -39,12 +39,13 @@ const fakeCategories = () => {
   return results;
 }
 
-const generateDescriptions = (qty) => {
+const generateDescriptions = (qty, startingVideoId) => {
   const t0 = process.hrtime();
   const results = []
   for (let i = 0; i < qty; i ++) {
     results.push(
       {
+        videoId: startingVideoId + i,
         text: fakeParagraph(),
         categories: fakeCategories(),
         likes: fakeLikes()
@@ -62,10 +63,42 @@ const fakeDate = () => {
   return faker.date.past();
 }
 
+const generateComments = (startId, batchSize, userQty = 100000) => {
+  let results = [];
+  for (let videoId = startId; videoId < startId + batchSize; videoId ++) {
+    let commentCount = Math.floor(Math.random() * 10);
+    for (let i = 0; i < commentCount; i ++) {
+      let userId = Math.floor(Math.random() * userQty);
+      results.push({
+        videoId,
+        text: fakeParagraph(),
+        date: fakeDate(),
+        userId
+      });
+    }
+  }
+  return results;
+}
+
 
 /* User table fakes */
-const fakeAvatar = (qty) => {
+const fakeAvatar = () => {
   return faker.internet.avatar();
 }
 
-module.exports = generateDescriptions;
+const fakeUsername = () => {
+  return faker.internet.userName();
+}
+
+const generateUsers = (qty) => {
+  let results = [];
+  for (let i = 0; i < qty; i ++) {
+    results.push({
+      username: fakeUsername(),
+      user_thumbnail: fakeAvatar()
+    });
+  }
+  return results;
+}
+
+module.exports = { generateDescriptions, generateUsers, generateComments }
