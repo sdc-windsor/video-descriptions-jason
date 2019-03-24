@@ -1,7 +1,7 @@
 require('dotenv').config();
 const fs = require('fs')
 const path = require('path')
-const { Pool, Client } = require('pg')
+const { Pool } = require('pg')
 const copyFrom = require('pg-copy-streams').from;
 const srcDir = path.resolve(__dirname, '../data');
 const pool = new Pool();
@@ -10,7 +10,7 @@ const prettyMs = require('pretty-ms');
 
 const { Description, Comment, User } = require('./index.js');
 
-/* Streams contents of CSV file into database */
+/* Streams the contents of a CSV file into the database */
 const seedFromCSV = async (Model, table) => {
   const getElapsed = hirestime();
 
@@ -28,6 +28,7 @@ const seedFromCSV = async (Model, table) => {
   return readStream.pipe(writeStream);
 }
 
+/* Combines seeding functions into one */
 const seed = async () => {
   await seedFromCSV(User, 'users');
   await seedFromCSV(Description, 'descriptions');
