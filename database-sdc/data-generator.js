@@ -111,4 +111,4 @@ const generateData = (videoQty, userQty) => {
   generateComments(videoQty, userQty);
 }
 
-generateData(10000, 100);
+generateData();
