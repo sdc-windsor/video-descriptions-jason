@@ -24,3 +24,8 @@ coverage
 build/
 dist/
 
+# Data
+data/
+data/comments.csv
+data/descriptions.csv
+data/users.csv
