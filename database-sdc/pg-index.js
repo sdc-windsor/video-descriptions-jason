@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('sdc2', 'postgres', 'postgres', {
+const sequelize = new Sequelize('sdc', 'postgres', 'postgres', {
   host: 'localhost',
   dialect: 'postgres',
   logging: false
@@ -14,7 +14,8 @@ const Description = sequelize.define('description',
     categories: Sequelize.ARRAY(Sequelize.TEXT)
   },
   {
-    timestamps: false
+    timestamps: false,
+    underscored: true
   }
 );
 
@@ -25,7 +26,8 @@ const Comment = sequelize.define('comment',
     date: Sequelize.DATE
   },
   {
-    timestamps: false
+    timestamps: false,
+    underscored: true,
   }
 );
 
@@ -35,7 +37,8 @@ const User = sequelize.define('user',
     user_thumbnail: Sequelize.TEXT
   },
   {
-    timestamps: false
+    timestamps: false,
+    underscored: true,
   }
 );
 

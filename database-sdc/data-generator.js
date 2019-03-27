@@ -65,7 +65,6 @@ const fakeUsername = () => {
 /* CSV generators */
 const generateDescriptions = (qty) => {
   const file = `${dataDir}/descriptions.csv`;
-  // const descriptions = fs.createWriteStream(`${dataDir}/descriptions.csv`);
   fs.writeFileSync(file, 'id,videoId,text,likes,categories\n');
   for (let i = 0; i < qty; i ++) {
     let text = fakeParagraph();
@@ -111,4 +110,4 @@ const generateData = (videoQty, userQty) => {
   generateComments(videoQty, userQty);
 }
 
-generateData();
+generateData(10000, 100);
