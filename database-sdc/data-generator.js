@@ -2,6 +2,7 @@ const faker = require('faker');
 const fs = require('fs');
 const path = require('path');
 const dataDir = path.resolve(__dirname, '../data')
+const dateFns = require('date-fns');
 
 const categories = [
   'Auto & Vehicles',
@@ -50,8 +51,10 @@ const fakeCategories = () => {
 
 /* Fakes for Comments table */
 const fakeDate = () => {
-  return faker.date.past().toISOString();
+  return dateFns.format(faker.date.past(), 'YYYY-MM-DD HH:MM:ssZZ');
 }
+
+// yyyy-mm-dd'T'HH:mm:ssZ
 
 /* Fakes for Users table */
 const fakeAvatar = () => {
@@ -65,7 +68,6 @@ const fakeUsername = () => {
 /* CSV generators */
 const generateDescriptions = (qty) => {
   const file = `${dataDir}/descriptions.csv`;
-  // const descriptions = fs.createWriteStream(`${dataDir}/descriptions.csv`);
   fs.writeFileSync(file, 'id,videoId,text,likes,categories\n');
   for (let i = 0; i < qty; i ++) {
     let text = fakeParagraph();
@@ -105,7 +107,7 @@ const generateComments = (videoQty, userQty) => {
   }
 }
 
-const generateData = (videoQty, userQty) => {
+const generateData = (videoQty = 10000000, userQty = 100000) => {
   generateDescriptions(videoQty);
   generateUsers(userQty);
   generateComments(videoQty, userQty);

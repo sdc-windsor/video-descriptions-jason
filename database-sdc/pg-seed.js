@@ -8,7 +8,7 @@ const pool = new Pool();
 const hirestime = require('hirestime');
 const prettyMs = require('pretty-ms');
 
-const { Description, Comment, User } = require('./index.js');
+const { Description, Comment, User } = require('./pg-index.js');
 
 /* Streams the contents of a CSV file into the database */
 const seedFromCSV = async (Model, table) => {
