@@ -2,6 +2,7 @@ const faker = require('faker');
 const fs = require('fs');
 const path = require('path');
 const dataDir = path.resolve(__dirname, '../data')
+const dateFns = require('date-fns');
 
 const categories = [
   'Auto & Vehicles',
@@ -50,8 +51,10 @@ const fakeCategories = () => {
 
 /* Fakes for Comments table */
 const fakeDate = () => {
-  return faker.date.past().toISOString();
+  return dateFns.format(faker.date.past(), 'YYYY-MM-DD HH:MM:ssZZ');
 }
+
+// yyyy-mm-dd'T'HH:mm:ssZ
 
 /* Fakes for Users table */
 const fakeAvatar = () => {
@@ -110,4 +113,4 @@ const generateData = (videoQty, userQty) => {
   generateComments(videoQty, userQty);
 }
 
-generateData(10000, 100);
+generateData(100, 10);

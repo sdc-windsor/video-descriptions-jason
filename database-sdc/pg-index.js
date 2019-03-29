@@ -15,8 +15,11 @@ const Description = sequelize.define('description',
   },
   {
     timestamps: false,
-    underscored: true
-  }
+    underscored: true,
+    indexes: [
+      {unique: true, fields: ['video_id']}
+    ],
+  },
 );
 
 const Comment = sequelize.define('comment',

@@ -1,3 +1,5 @@
+-- Run this file in the terminal: cqlsh > SOURCE 'absolute-file-path'
+
 DROP KEYSPACE IF EXISTS sdc;
 CREATE KEYSPACE sdc WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
@@ -10,7 +12,7 @@ CREATE TABLE sdc.descriptions
   likes bigint
 );
 
-CREATE INDEX videoindex ON sdc.descriptions (video_id);
+CREATE INDEX VideoDescription ON sdc.descriptions (video_id);
 
 CREATE TABLE sdc.comments
 (
@@ -20,6 +22,8 @@ CREATE TABLE sdc.comments
   user_id bigint,
   video_id bigint
 );
+
+CREATE INDEX VideoComment ON sdc.comments (video_id);
 
 CREATE TABLE sdc.users
 (

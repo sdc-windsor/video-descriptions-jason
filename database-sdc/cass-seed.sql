@@ -1,3 +1,5 @@
+-- Run this file in the terminal: cqlsh > SOURCE 'absolute-file-path'
+
 USE sdc;
 
 COPY users (id, username, user_thumbnail)
