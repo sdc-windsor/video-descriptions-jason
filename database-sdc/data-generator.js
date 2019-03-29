@@ -107,10 +107,10 @@ const generateComments = (videoQty, userQty) => {
   }
 }
 
-const generateData = (videoQty, userQty) => {
+const generateData = (videoQty = 10000000, userQty = 100000) => {
   generateDescriptions(videoQty);
   generateUsers(userQty);
   generateComments(videoQty, userQty);
 }
 
-generateData(100, 10);
+generateData();
