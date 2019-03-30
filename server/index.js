@@ -25,6 +25,11 @@ Description.findOne({video_id: req.params.video_id}).then((data) => {
   });
 });
 
+// anticipated routes for 'descriptions' endpoint
+// app.post('/categories/:video_id')
+// app.put('/categories/:video_id')
+// app.delete('/categories/:video_id')
+
 /* Route 2
 Retrieves a user record by user id. Used by the getAuthorImg function in app.jsx
 and the getUserInfo function in both AddComment.jsx and Comment.jsx */
@@ -46,6 +51,12 @@ app.get('/userid/:username', function(req,res){
     res.end();
   })
 })
+
+// anticipated routes for 'users' endpoint
+// app.get('/userid)
+// app.post('/userid/:username')
+// app.put('/userid/:username')
+// app.delete('/userid/:username')
 
 /* Route 4
 This route is ONLY used in tests. It doesn't have any connection to the front end. */
@@ -77,22 +88,28 @@ app.get('/comments/:video_id', function (req, res) {
   });
 });
 
-/* Route 6
-Identical to Route 1. Used by the getDetail function in app.jsx. */
-app.get('/details/:video_id', function (req, res) {
-  Description.find({video_id: req.params.video_id}).then((data) => {
-    res.json(data);
-    res.end();
-  })
-});
-
-/* Route 7
+/* Route 5a
 Inserts a comment. Used by the sendComment function in CommentsList.jsx */
 app.post('/comments/:video_id', function (req, res) {
   console.log('REQ BODY', req.body);
   saveComment(req.body.video_id, req.body.user_id, req.body.comment, req.body.date, ()=>{
     console.log('Saved comment to database')
     res.send('Saved comment to database');
+    res.end();
+  })
+});
+
+// anticipated routes for 'comments' endpoint
+// app.get('/comments)
+// app.put('/comments/:comment_id')
+// app.delete('/comments/:comment_id')
+// post is already handled
+
+/* Route 6
+Identical to Route 1. Used by the getDetail function in app.jsx. */
+app.get('/details/:video_id', function (req, res) {
+  Description.find({video_id: req.params.video_id}).then((data) => {
+    res.json(data);
     res.end();
   })
 });
