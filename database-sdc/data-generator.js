@@ -54,8 +54,6 @@ const fakeDate = () => {
   return dateFns.format(faker.date.past(), 'YYYY-MM-DD HH:MM:ssZZ');
 }
 
-// yyyy-mm-dd'T'HH:mm:ssZ
-
 /* Fakes for Users table */
 const fakeAvatar = () => {
   return faker.internet.avatar();
@@ -69,12 +67,13 @@ const fakeUsername = () => {
 const generateDescriptions = (qty) => {
   const file = `${dataDir}/descriptions.csv`;
   fs.writeFileSync(file, 'id,videoId,text,likes,categories\n');
-  for (let i = 0; i < qty; i ++) {
+  for (let i = 1; i <= qty; i ++) {
     let text = fakeParagraph();
     let categories = processArrayForCSV(fakeCategories());
     let likes = fakeLikes();
     fs.appendFileSync(file, `${i},${i},${text},${likes},${categories}\n`);
   }
+  console.log('All descriptions have been generated!');
 }
 
 const generateUsers = (qty) => {
@@ -105,12 +104,13 @@ const generateComments = (videoQty, userQty) => {
       commentId ++;
     }
   }
+  console.log('All comments have been generated!');
 }
 
 const generateData = (videoQty = 10000000, userQty = 100000) => {
   generateDescriptions(videoQty);
-  generateUsers(userQty);
-  generateComments(videoQty, userQty);
+  // generateUsers(userQty);
+  // generateComments(videoQty, userQty);
 }
 
 generateData();

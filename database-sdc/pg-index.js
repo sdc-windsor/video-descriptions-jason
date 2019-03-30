@@ -31,6 +31,9 @@ const Comment = sequelize.define('comment',
   {
     timestamps: false,
     underscored: true,
+    indexes: [
+      {name: 'video_index', unique: false, fields: ['video_id'], method: 'BTREE'}
+    ]
   }
 );
 

@@ -67,7 +67,7 @@ app.get('/videosByCategory/:category', function (req, res) {
 });
 
 /* Route 5
-This route retrieves all comment records for a video_id.
+Retrieves all comment records for a video_id.
 Used by the getComments function in CommentsList.jsx
 and the getNumOfComponents function in IconTab.jsx. */
 app.get('/comments/:video_id', function (req, res) {
@@ -87,7 +87,7 @@ app.get('/details/:video_id', function (req, res) {
 });
 
 /* Route 7
-This route inserts a comment. Used by the sendComment function in CommentsList.jsx */
+Inserts a comment. Used by the sendComment function in CommentsList.jsx */
 app.post('/comments/:video_id', function (req, res) {
   console.log('REQ BODY', req.body);
   saveComment(req.body.video_id, req.body.user_id, req.body.comment, req.body.date, ()=>{
