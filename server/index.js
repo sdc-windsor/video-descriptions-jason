@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const { sequelize } = require('../db/pg-index.js');
-const { readAllComments, readOneComment, createComment, updateComment, deleteComment } = require('./controllers/comments.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,29 +17,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use('/:id', express.static('public'));
 
-
-/* CRUD - COMMENTS */
-app.get('/api/comments', (req, res) => {
-  if (req.query.page && req.query.pageSize) {
-    readAllComments(req, res);
-  } else if (req.query.id) {
-    readOneComment(req, res);
-  } else {
-    res.send('Sorry, those aren\'t the correct params for this route!');
-  }
-});
-
-app.post('/api/comments', (req, res) => {
-  createComment(req, res);
-});
-
-app.put('/api/comments', (req, res) => {
-  updateComment(req, res);
-});
-
-app.delete('/api/comments', (req, res) => {
-  deleteComment(req, res);
-});
+app.use('/api/comments', require('./routes/comments.js'));
 
 // DESCRIPTION ROUTES
   // app.get('/descriptions')
