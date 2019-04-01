@@ -1,24 +1,19 @@
-// COMMENTS ROUTES
-  // app.get('/comments')
-  // app.get('/comments/comment_id)
-  // app.post('/comments')
-  // app.put('/comments/comment_id')
-  // app.delete('/comments/comment_id')
-
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op
+const { Op } = require('sequelize');
 const { Comment } =  require('../../db/pg-index.js');
 
-/* Read all comments, paginated. */
+/* Reads all comments, paginated. */
 exports.readAllComments = (req, res) => {
-  const { page, recordsPerPage } = req.query;
-  const start = (page - 1) * recordsPerPage + 1;
-  const end = start + recordsPerPage - 1;
+  const page = parseInt(req.query.page);
+  const pageSize = parseInt(req.query.pageSize);
+  const start = (page - 1) * pageSize + 1;
+  const end = start + pageSize - 1;
 
-  Comment.findAll({where: {
-    [Op.between]: [start, end]
+  return Comment.findAll({where: {
+    id: {
+      [Op.between]: [start, end]
+    }
   }})
-  .then((comments) => {
+  .then(comments => {
     res.json(comments);
   })
   .catch(err => {
@@ -26,11 +21,11 @@ exports.readAllComments = (req, res) => {
   });
 }
 
+/* Reads one comment by comment id. */
 exports.readOneComment = (req, res) => {
-  Comment.findOne({where: {
-    id: req.id
-  }})
-  .then((comment) => {
+  const { id } = req.query;
+  return Comment.findOne({where: { id }})
+  .then(comment => {
     res.json(comment);
   })
   .catch(err => {
@@ -38,9 +33,11 @@ exports.readOneComment = (req, res) => {
   });
 }
 
+/* Creates one comment and sends the new
+comment back to the client. */
 exports.createComment = (req, res) => {
-  Comment.create(req.body)
-  .then((comment) => {
+  return Comment.create(req.body)
+  .then(comment => {
     res.json(comment);
   })
   .catch(err => {
@@ -48,22 +45,26 @@ exports.createComment = (req, res) => {
   });
 }
 
+/* Updates one comment by id and sends the
+quantity updated back to the client. */
 exports.updateComment = (req, res) => {
   const { id } = req.query;
-  Comment.update(req.body, { where: { id } })
-  .then((comment) => {
-    res.json(comment);
+  return Comment.update(req.body, { where: { id } })
+  .then(numUpdated => {
+    res.json(numUpdated);
   })
   .catch(err => {
     res.json(err);
   });
 }
 
+/* Deletes one comment by id. */
 exports.deleteComment = (req, res) => {
   const { id } = req.query;
-  Comment.destroy(req.body, { where: { id } })
-  .then((comment) => {
-    res.json(comment);
+  console.log(id);
+  return Comment.destroy({ where: { id } })
+  .then(numDeleted => {
+    res.json(numDeleted);
   })
   .catch(err => {
     res.json(err);

@@ -51,4 +51,4 @@ const User = sequelize.define('user',
 User.hasMany(Comment);
 Comment.belongsTo(User);
 
-module.exports = { Description, Comment, User };
+module.exports = { Description, Comment, User, sequelize };
