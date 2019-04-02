@@ -1,8 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { Description } = require ('../../db/pg-index.js');
-const { readAll, readOne, create, update, deleteRecord } = require('../controller.js');
-
+const { readAll, readOne, create, update, deleteRecord } = require('../controllers/crud.js');
 
 router.get('/', (req, res) => {
   if (req.query.page && req.query.pageSize) {

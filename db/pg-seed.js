@@ -7,7 +7,7 @@ const srcDir = path.resolve(__dirname, '../data');
 const pool = new Pool();
 const hirestime = require('hirestime');
 const prettyMs = require('pretty-ms');
-var ProgressBar = require('progress');
+const ProgressBar = require('progress');
 
 const { Description, Comment, User } = require('./pg-index.js');
 

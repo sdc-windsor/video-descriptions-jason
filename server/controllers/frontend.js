@@ -2,7 +2,7 @@
 exactly the shape that the UI expects,
 given the parameters it provides. */
 
-const { Description, Comment, User } = require('../db/pg-index.js');
+const { Description, Comment, User } = require('../../db/pg-index.js');
 
 /* Retrieves a description record by videoId. */
 exports.getDescription = (req, res) => {
