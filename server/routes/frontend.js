@@ -1,14 +1,13 @@
-// question: Should I use the same schema for the frontend? I feel like I should. Let's give it a shot and see if it works.
-// serve up the bundle.js file at the :id route
-// serve up this file at any '/' route, which should go through this list and see if anything applies
-// then, it should proceed to the next routes.
-
 const express = require('express');
 const router = express.Router();
-const { Comment, User } = require ('../../db/pg-index.js');
+const { Comment } = require ('../../db/pg-index.js');
 const { create } = require('../controllers/crud.js');
 const { getDescription, getUser, getUserId, getCommentsForVideo, getAllDescriptions } = require('../controllers/frontend.js');
 
+/* These are the routes utilized by the frontend.
+I have chosen to keep them independent from the CRUD API
+routes because their names and structure is not
+entirely intuitive/standardized. */
 
 /* ROUTE 1
 Retrieves a description record by video_id.

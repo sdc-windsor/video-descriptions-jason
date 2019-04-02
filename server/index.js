@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const PORT = 3003;
 const { sequelize } = require('../db/pg-index.js');
 
 
@@ -21,6 +22,7 @@ app.use('/api/comments', require('./routes/comments.js'));
 app.use('/api/descriptions', require('./routes/descriptions.js'));
 app.use('/api/users', require('./routes/users.js'));
 
+/* TODO: Refactor to use env variable */
+app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 
 module.exports = app;
-

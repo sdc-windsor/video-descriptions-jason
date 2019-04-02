@@ -3,6 +3,8 @@ const router = express.Router();
 const { User } = require ('../../db/pg-index.js');
 const { readAll, readOne, create, update, deleteRecord } = require('../controllers/crud.js');
 
+/* CRUD routes for the users endpoint */
+
 router.get('/', (req, res) => {
   if (req.query.page && req.query.pageSize) {
     readAll(User, req, res);
