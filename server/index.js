@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
-const Description = require('../database/index').Description;
-const User = require('../database/index').User;
-const Comment = require('../database/index').Comment;
+// const Description = require('../database/index').Description;
+const { Description, Comment, User } = require('../db/pg-index.js');
+// const User = require('../database/index').User;
+// const Comment = require('../database/index').Comment;
 const saveComment = require('../database/helper').saveComment;
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const { sequelize } = require('../db/pg-index.js');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,36 +19,25 @@ app.use(express.static('public'));
 app.use('/:id', express.static('public'));
 
 app.use('/api/comments', require('./routes/comments.js'));
-
-// DESCRIPTION ROUTES
-  // app.get('/descriptions')
-  // app.get('/descriptions/description_id)
-  // app.post('/descriptions')
-  // app.put('/descriptions/description_id')
-  // app.delete('/descriptions/description_id')
-
-// COMMENTS ROUTES
-  // app.get('/comments')
-  // app.get('/comments/comment_id)
-  // app.post('/comments')
-  // app.put('/comments/comment_id')
-  // app.delete('/comments/comment_id')
-
-// USERS ROUTES
-  // app.get('/users')
-  // app.get('/users/user_id)
-  // app.post('/users')
-  // app.put('/users/user_id')
-  // app.delete('/users/user_id')
+app.use('/api/descriptions', require('./routes/descriptions.js'));
+app.use('/api/users', require('./routes/users.js'));
 
 
 /* ROUTE 1
 Retrieves a description record by video_id.
 Used by the getNumOfLikes function in IconTab.jsx */
 app.get('/categories/:video_id', function (req, res) {
-Description.findOne({video_id: req.params.video_id}).then((data) => {
-  res.json(data);
-    res.end();
+// Description.findOne({video_id: req.params.video_id}).then((data) => {
+//   res.json(data);
+//     res.end();
+//   });
+  const { video_id } = req.params;
+  return Description.findOne({ where: { video_id }})
+  .then(description => {
+    res.json(description);
+  })
+  .catch(err => {
+    res.json(err);
   });
 });
 
@@ -68,9 +58,17 @@ Description.findOne({video_id: req.params.video_id}).then((data) => {
 Retrieves a user record by user id. Used by the getAuthorImg function in app.jsx
 and the getUserInfo function in both AddComment.jsx and Comment.jsx */
 app.get('/usersthumbnail/:user_id', function (req, res) {
-  User.findOne({_id: req.params.user_id}).then((data) => {
-    res.json(data);
-    res.end();
+  // User.findOne({_id: req.params.user_id}).then((data) => {
+  //   res.json(data);
+  //   res.end();
+  // });
+  const id = req.params.user_id;
+  return User.findOne({where: { id }})
+  .then(user => {
+    res.json(user);
+  })
+  .catch(err => {
+    res.json(err);
   });
 });
 
@@ -87,12 +85,20 @@ app.get('/usersthumbnail/:user_id', function (req, res) {
 Retrieves a user ID by username. Used by the getAuthorImg function in app.jsx.
 The getAuthorImg has two get requests in it: one that gets the id based on the username
 (using this route), and one that gets the thumbnail based on the id (using the above route). */
-app.get('/userid/:username', function(req,res){
-  User.findOne({username: req.params.username}).then((data) => {
-    res.json(data._id);
-    res.end();
+app.get('/userid/:username', function(req, res){
+  const { username } = req.params;
+  // User.findOne({username: req.params.username}).then((data) => {
+  //   res.json(data._id);
+  //   res.end();
+  // })
+  User.findOne({where: { username }})
+  .then(user => {
+    res.json(user.id);
   })
-})
+  .catch(err => {
+    res.json(err);
+  });
+});
 
 /* RESPONSE: "5c8b1feba0a0f7484fb9700f" */
 
@@ -103,9 +109,17 @@ Retrieves all comment records for a video_id.
 Used by the getComments function in CommentsList.jsx
 and the getNumOfComponents function in IconTab.jsx. */
 app.get('/comments/:video_id', function (req, res) {
-  Comment.find({video_id: req.params.video_id}).sort({data:-1}).exec().then((data) => {
-    res.json(data);
-    res.end();
+  const { video_id } = req.params;
+  // Comment.find({video_id: req.params.video_id}).sort({data:-1}).exec().then((data) => {
+  //   res.json(data);
+  //   res.end();
+  // });
+  Comment.findAll({where: { video_id }, order: [['date','DESC']]})
+  .then(comments => {
+    res.json(comments);
+  })
+  .catch(err => {
+    res.json(err);
   });
 });
 
@@ -128,7 +142,7 @@ app.get('/comments/:video_id', function (req, res) {
 //   },
 // ]
 
-
+// START HERE!!
 
 /* ROUTE 4A
 Inserts a comment. Used by the sendComment function in CommentsList.jsx */
@@ -150,27 +164,6 @@ app.get('/details/:video_id', function (req, res) {
     res.json(data);
     res.end();
   })
-});
-
-
-
-/* ROUTE 6
-This route is ONLY used in tests. It doesn't have any connection to the front end. */
-app.get('/videosByCategory/:category', function (req, res) {
-  const arrayOfCategories = [];
-  const splitParams = req.params.category.split(',');
-  for (let l = 0; l < splitParams.length; l++) {
-    arrayOfCategories.push({
-      categories: {
-        $regex : new RegExp(`${splitParams[l]}`,'i')
-      }
-    });
-  }
-  Description.find({$and: arrayOfCategories})
-    .then((data)=>{
-      res.json(data);
-      res.end();
-    });
 });
 
 
