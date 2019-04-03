@@ -1,46 +1,64 @@
-# Project Name
+**Read All**
+----
+  Returns json data for all records in a specified table.
 
-> Project description
+* **URL**
 
-## Related Projects
+  /api/comments
+  /api/descriptions
+  /api/users
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+* **Method:**
 
-## Table of Contents
+  `GET`
+  
+*  **URL Params**
 
-1. [Usage](#Usage)
-  a. For Videos By Catergories endpoint, in order to put more than 1 categories for query search,     please use '%2C' between params when writing your url.
-     For example: in order to search for videos with categories of "Animation" and "Food", you can write it as following:
+   **Required:**
+ 
+   `page=[integer]`
+   `pageSize=[integer]`
 
-     http://localhost:8080/videosByCategory/animation%2Cfood
+* **Success Response:**
 
+  * **Code:** 200 <br />
+    **Content:** `[
+    {
+        "id": 4,
+        "videoId": 1,
+        "text": "Nam voluptatum quis est dolores sint...",
+        "date": "2018-07-31T20:07:53.000Z",
+        "userId": 83637
+    },
+    {
+        "id": 5,
+        "videoId": 1,
+        "text": "Vitae commodi velit. Quae quas sint vero voluptas esse....",
+        "date": "2018-12-02T01:12:00.000Z",
+        "userId": 56895
+    },
+    {
+        "id": 6,
+        "videoId": 1,
+        "text": "Doloremque architecto eos quo aut facere in iusto...",
+        "date": "2019-03-12T05:03:46.000Z",
+        "userId": 58650
+    }
+]`
+ 
+* **Error Response:**
 
+  * **Code:** 404 NOT FOUND <br />
+      **Content:** `Sorry, those aren't the correct params for this route!`
 
-1. [Requirements](#requirements)
-1. [Development](#development)
+* **Sample Call:**
 
-## Usage
-
-> Some usage instructions
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
-```
-
+  ```javascript
+    $.ajax({
+      url: "/api/comments?page=2&pageSize=3",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
