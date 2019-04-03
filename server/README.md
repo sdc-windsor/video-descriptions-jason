@@ -62,3 +62,54 @@
         console.log(r);
       }
     });
+
+**Read One**
+----
+  Returns json data for all records in a specified table.
+
+* **URL**
+
+  /api/comments
+  /api/descriptions
+  /api/users
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{
+    "id": 744681,
+    "videoId": 744681,
+    "text": "Necessitatibus totam facilis quia in sed est officia inventore nihil...",
+    "likes": 752315,
+    "categories": [
+        "People & Blogs",
+        "Auto & Vehicles"
+    ]
+}`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+      **Content:** `Sorry, those aren't the correct params for this route!`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/api/descriptions?id=744681",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
