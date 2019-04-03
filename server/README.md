@@ -65,7 +65,7 @@
 
 **Read One**
 ----
-  Returns json data for all records in a specified table.
+  Returns json data for one record in the specified table.
 
 * **URL**
 
@@ -109,6 +109,126 @@
       url: "/api/descriptions?id=744681",
       dataType: "json",
       type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+
+**Create**
+----
+  Creates a record in the specified table and returns json data for the record created.
+
+* **URL**
+
+  /api/comments
+  /api/descriptions
+  /api/users
+
+* **Method:**
+
+  `POST`
+  
+*  **Request Body Example**
+ 
+   `{videoId: 1, text: "I'm the 'C' in CRUD!!", userId: 10, date: "2019-02-12T00:02:05.000Z"}`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{
+    "id": 50000008,
+    "videoId": 1,
+    "text": "I'm the 'C' in CRUD!!",
+    "userId": 10,
+    "date": "2019-02-12T00:02:05.000Z"
+    }`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/api/comments",
+      dataType: "json",
+      type : "POST",
+      data: {
+        "videoId": 1,
+        "text": "I'm the 'C' in CRUD!!",
+        "userId": 10,
+        "date": "2019-02-12T00:02:05.000Z"
+       }
+      success : function(r) {
+        console.log(r);
+      }
+    });
+    
+**Update**
+----
+  Updates a record in the specified table and returns json data showing the number of records updated.
+
+* **URL**
+
+  /api/comments
+  /api/descriptions
+  /api/users
+
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+  
+*  **Request Body Example**
+ 
+   `{text: "And I'm the 'U'!!"}`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `[1]`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/api/comments",
+      dataType: "json",
+      type : "PUT",
+      data: {
+        "text": "And I'm the 'U'!!",
+       }
+      success : function(r) {
+        console.log(r);
+      }
+    });
+ 
+ **Delete**
+----
+  Deletes a record in the specified table and returns the number of records that were deleted (should always be 1).
+
+* **URL**
+
+  /api/comments
+  /api/descriptions
+  /api/users
+
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `1`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/api/comments?id=10000",
+      dataType: "json",
+      type : "DELETE",
       success : function(r) {
         console.log(r);
       }
