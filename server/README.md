@@ -1,3 +1,8 @@
+
+## CRUD API Documentation ##
+
+_A quick note: The API is quite generic, so the below routes work for all three endpoints: comments, descriptions, and users. In a real-life API, each endpoint might have different requirements (e.g. maybe we'd want to get a user by username and not by ID), but for this API, most interaction is initiated by ID._
+
 **Read All**
 ----
   Returns json data for all records in a specified table.
