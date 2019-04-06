@@ -20,7 +20,7 @@ const Description = sequelize.define('description',
     timestamps: false,
     underscored: true,
     indexes: [
-      {unique: false, fields: ['video_id']}
+      {unique: true, fields: ['video_id']}
     ],
   },
 );
