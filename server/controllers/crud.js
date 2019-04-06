@@ -34,6 +34,7 @@ back to the client. */
 exports.create = (Model, req, res) => {
   return Model.create(req.body)
   .then(newRecord => {
+    res.status(201);
     res.json(newRecord);
   })
   .catch(err => {

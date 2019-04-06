@@ -3,7 +3,8 @@ const fs = require('fs')
 const path = require('path')
 const { Pool } = require('pg')
 const copyFrom = require('pg-copy-streams').from;
-const srcDir = path.resolve(__dirname, '../data');
+const { data } = require('../config.js');
+const dataDir = path.resolve(__dirname, data);
 const pool = new Pool();
 const hirestime = require('hirestime');
 const prettyMs = require('pretty-ms');
@@ -14,7 +15,7 @@ const { Description, Comment, User } = require('./pg-index.js');
 /* Streams the contents of a CSV file into the database */
 const seedFromCSV = async (Model, table) => {
 
-  const stats = fs.statSync(`${srcDir}/${table}.csv`)
+  const stats = fs.statSync(`${dataDir}/${table}.csv`)
   const fileSizeInBytes = stats.size
 
   const bar = new ProgressBar(`Seeding ${table} table: [:bar] :percent`, {
@@ -29,7 +30,7 @@ const seedFromCSV = async (Model, table) => {
   await Model.sync({force: true});
   const client = await pool.connect();
   const writeStream = client.query(copyFrom(`COPY ${table} FROM STDIN CSV HEADER`));
-  const readStream = fs.createReadStream(`${srcDir}/${table}.csv`);
+  const readStream = fs.createReadStream(`${dataDir}/${table}.csv`);
 
   writeStream.on('data', (chunk) => {
     bar.tick(chunk.length);
@@ -46,9 +47,9 @@ const seedFromCSV = async (Model, table) => {
 
 /* Combines seeding functions into one */
 const seed = async () => {
-  // await seedFromCSV(User, 'users');
+  await seedFromCSV(User, 'users');
   await seedFromCSV(Description, 'descriptions');
-  // await seedFromCSV(Comment, 'comments');
+  await seedFromCSV(Comment, 'comments');
 }
 
 seed();

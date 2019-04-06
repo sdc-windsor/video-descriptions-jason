@@ -1,8 +1,9 @@
 const faker = require('faker');
 const fs = require('fs');
 const path = require('path');
-const dataDir = path.resolve(__dirname, '../data')
 const dateFns = require('date-fns');
+const { data } = require('../config.js');
+const dataDir = path.resolve(__dirname, data);
 
 const categories = [
   'Auto & Vehicles',

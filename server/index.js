@@ -1,8 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const PORT = 3003;
+const { port } = require('../config.js');
 const { sequelize } = require('../db/pg-index.js');
 
 
@@ -23,6 +24,6 @@ app.use('/api/descriptions', require('./routes/descriptions.js'));
 app.use('/api/users', require('./routes/users.js'));
 
 /* TODO: Refactor to use env variable */
-app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
+const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
 
-module.exports = app;
+module.exports = server;
