@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { sequelize } = require('./pg-index.js')
 const fs = require('fs');
 const path = require('path');
 const { Pool } = require('pg');
@@ -22,8 +23,6 @@ const { Description, Comment, User } = require('./pg-index.js');
 
 /* Streams the contents of a CSV file into the database */
 const seedFromCSV = async (Model, table) => {
-
-  console.log(dataDir);
 
   const stats = fs.statSync(`${dataDir}/${table}.csv`)
   const fileSizeInBytes = stats.size
@@ -53,13 +52,14 @@ const seedFromCSV = async (Model, table) => {
   });
 
   return readStream.pipe(writeStream);
+
 }
 
 /* Combines seeding functions into one */
-const seed = async () => {
+module.exports = seed = async () => {
   await seedFromCSV(User, 'users');
   await seedFromCSV(Description, 'descriptions');
   await seedFromCSV(Comment, 'comments');
 }
 
-seed();
+// seed();

@@ -11,7 +11,7 @@ const sequelize = new Sequelize(database, user, password, {
 
 const Description = sequelize.define('description',
   {
-    videoId: {type: Sequelize.INTEGER},
+    videoId: Sequelize.INTEGER,
     text: Sequelize.TEXT,
     likes: Sequelize.INTEGER,
     categories: Sequelize.ARRAY(Sequelize.TEXT)
@@ -20,7 +20,7 @@ const Description = sequelize.define('description',
     timestamps: false,
     underscored: true,
     indexes: [
-      {unique: true, fields: ['video_id']}
+      {unique: false, fields: ['video_id']}
     ],
   },
 );
