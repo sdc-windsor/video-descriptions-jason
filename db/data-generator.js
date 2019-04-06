@@ -110,8 +110,8 @@ const generateComments = (videoQty, userQty) => {
 
 const generateData = (videoQty = 10000000, userQty = 100000) => {
   generateDescriptions(videoQty);
-  // generateUsers(userQty);
-  // generateComments(videoQty, userQty);
+  generateUsers(userQty);
+  generateComments(videoQty, userQty);
 }
 
-generateData();
+generateData(100, 100);

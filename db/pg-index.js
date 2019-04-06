@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
-const { pg: { host, user, name, password } } = require('../config.js');
+const { pg: { host, user, database, password } } = require('../config.js');
 
-const sequelize = new Sequelize(name, user, password, {
+console.log(host, user, database, password)
+
+const sequelize = new Sequelize(database, user, password, {
   host,
   dialect: 'postgres',
   logging: false

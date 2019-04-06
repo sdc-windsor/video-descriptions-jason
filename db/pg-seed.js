@@ -1,19 +1,29 @@
 require('dotenv').config();
-const fs = require('fs')
-const path = require('path')
-const { Pool } = require('pg')
+const fs = require('fs');
+const path = require('path');
+const { Pool } = require('pg');
 const copyFrom = require('pg-copy-streams').from;
-const { data } = require('../config.js');
+const { data, pg: { host, user, port, database, password } } = require('../config.js');
 const dataDir = path.resolve(__dirname, data);
-const pool = new Pool();
 const hirestime = require('hirestime');
 const prettyMs = require('pretty-ms');
 const ProgressBar = require('progress');
+
+/* Create a pool of connections for CSV streaming */
+const pool = new Pool({
+  host,
+  user,
+  port,
+  database,
+  password
+});
 
 const { Description, Comment, User } = require('./pg-index.js');
 
 /* Streams the contents of a CSV file into the database */
 const seedFromCSV = async (Model, table) => {
+
+  console.log(dataDir);
 
   const stats = fs.statSync(`${dataDir}/${table}.csv`)
   const fileSizeInBytes = stats.size
