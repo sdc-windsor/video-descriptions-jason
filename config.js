@@ -1,6 +1,9 @@
 require('dotenv').config()
 const env = process.env.NODE_ENV;
-console.log(env);
+
+/* Configuration bindings for each environment.
+Just set the NODE_ENV when the environment is initialized,
+and the relevant configuration will be exported from this file. */
 
 const dev = {
   port: process.env.PORT_DEV,
@@ -30,6 +33,9 @@ const test = {
     password: process.env.PG_PASSWORD_TEST,
   }
 };
+
+/* Exporting the relevant settings from the file,
+based on NODE_ENV */
 
 const config = {
  dev,
