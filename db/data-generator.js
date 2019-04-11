@@ -1,8 +1,12 @@
+require('dotenv').config()
 const faker = require('faker');
 const fs = require('fs');
 const path = require('path');
 const dateFns = require('date-fns');
-const { data } = require('../config.js');
+
+/* Imports the data directory and the description and user quantities,
+based on the current environment. */
+const { data, descriptions, users } = require('../config.js');
 const dataDir = path.resolve(__dirname, data);
 
 const categories = [
@@ -112,10 +116,10 @@ const generateComments = (videoQty, userQty) => {
 }
 
 /* By default, invoking generateData will create 10M primary records. */
-const generateData = (videoQty = 10000000, userQty = 100000) => {
-  generateDescriptions(videoQty);
+const generateData = (descriptionQty = 10000000, userQty = 100000) => {
+  generateDescriptions(descriptionQty);
   generateUsers(userQty);
-  generateComments(videoQty, userQty);
+  generateComments(descriptionQty, userQty);
 }
 
 /*
@@ -124,4 +128,4 @@ Running the generateData function will overwrite the descriptions/comments/users
 .csv files in the data directory (or the data-test directory if NODE_ENV=test)
 */
 
-// generateData();
+generateData(descriptions, users);

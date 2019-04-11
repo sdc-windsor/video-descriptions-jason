@@ -10,6 +10,8 @@ and the relevant configuration will be exported from this file. */
 const dev = {
   port: process.env.PORT_DEV,
   data: process.env.DATA_DEV,
+  descriptions: process.env.DESCRIPTIONS_QTY_DEV,
+  users: process.env.USERS_QTY_DEV,
   pg: {
     host: process.env.PG_HOST_DEV,
     user: process.env.PG_USER_DEV,
@@ -22,6 +24,8 @@ const dev = {
 const test = {
   port: process.env.PORT_TEST,
   data: process.env.DATA_TEST,
+  descriptions: process.env.DESCRIPTIONS_QTY_TEST,
+  users: process.env.USERS_QTY_TEST,
   pg: {
     host: process.env.PG_HOST_TEST,
     user: process.env.PG_USER_TEST,
@@ -34,6 +38,8 @@ const test = {
 const prod = {
   port: process.env.PORT,
   data: process.env.DATA,
+  descriptions: process.env.DESCRIPTIONS_QTY,
+  users: process.env.USERS_QTY,
   pg: {
     host: process.env.PG_HOST,
     user: process.env.PG_USER,
