@@ -57,7 +57,7 @@ USERS_QTY=100000
 
 PG_HOST='localhost'
 PG_USER='postgres'
-PG_DB='test'
+PG_DB='sdc'
 PG_PASSWORD='postgres'
 PG_PORT=5432
 ```
