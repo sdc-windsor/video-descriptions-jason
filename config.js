@@ -14,11 +14,6 @@ const dev = {
     port: process.env.PG_PORT_DEV,
     database: process.env.PG_DB_DEV,
     password: process.env.PG_PASSWORD_DEV,
-  },
-  cass: {
-    contactPoint: process.env.CASS_CONTACTPOINT,
-    localDataCenter: process.env.CASS_LDC,
-    keyspace: process.env.CASS_KEYSPACE
   }
 };
 
