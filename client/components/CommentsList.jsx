@@ -32,9 +32,9 @@ export default class CommentsList extends React.Component {
 
     sendComment(video_id) {
         let data = {
-            video_id: video_id,
-            user_id: '5c8b1feba0a0f7484fb96fee',
-            comment: this.state.commentToSend,
+            videoId: video_id,
+            userId: 1,
+            text: this.state.commentToSend,
             date: new Date()
         }
 
@@ -43,8 +43,9 @@ export default class CommentsList extends React.Component {
             id = id.split('/');
             this.setState({
                 commentToSend: 'Comment'
+            }, () => {
+                this.getComments(Number(id[1]));
             });
-            this.getComments(Number(id[1]));
         })
     }
 

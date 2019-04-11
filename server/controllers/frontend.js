@@ -53,8 +53,8 @@ exports.getCommentsForVideo = (req, res) => {
 }
 
 /* Retrieves a description record by videoId,
-using findAll method (returns an array). Admittedly,
-this makes little sense, but the frontend remains intact. */
+using findAll method (returns an array). This makes little sense,
+but the frontend remains intact... */
 exports.getAllDescriptions = (req, res) =>  {
   const { video_id } = req.params;
   return Description.findAll({ where: { video_id }})

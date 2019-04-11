@@ -8,7 +8,8 @@ const dataDir = path.resolve(__dirname, data);
 const categories = [
   'Auto & Vehicles',
   'Beauty & Fashion',
-  'Comedy', 'Education',
+  'Comedy',
+  'Education',
   'Entertainment',
   'Family Entertainment',
   'Film & Animation',
@@ -42,10 +43,11 @@ const processArrayForCSV = (arr) => {
 
 const fakeCategories = () => {
   const results = [];
+  const categoriesCopy = categories.slice();
   let qty = Math.floor(Math.random() * 3 + 1);
   for (let i = 0; i < qty; i ++) {
-    let index = Math.floor(Math.random() * categories.length);
-    results.push(categories[index]);
+    let index = Math.floor(Math.random() * categoriesCopy.length);
+    results.push(categoriesCopy.splice(index, 1)[0]);
   }
   return results;
 }
@@ -110,8 +112,8 @@ const generateComments = (videoQty, userQty) => {
 
 const generateData = (videoQty = 10000000, userQty = 100000) => {
   generateDescriptions(videoQty);
-  generateUsers(userQty);
-  generateComments(videoQty, userQty);
+  // generateUsers(userQty);
+  // generateComments(videoQty, userQty);
 }
 
-generateData(100, 100);
+generateData();

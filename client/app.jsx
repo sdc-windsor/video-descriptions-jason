@@ -20,20 +20,18 @@ class App extends React.Component {
     this.getAuthorImg = this.getAuthorImg.bind(this);
   }
 
-  getAuthorImg(name, cb) {
-    axios.get(`http://localhost:3003/userid/${name}`)
+  /* Given a user name, returns the thumbnail for that user */
+  getAuthorImg(userId = 1, cb) {
+    axios.get(`http://localhost:3003/usersthumbnail/${userId}`)
       .then(data => {
-        axios.get(`http://localhost:3003/usersthumbnail/${data.data}`)
-          .then(data => {
-            cb(data);
-          });
-    });
+        cb(data);
+      });
   }
 
   getDetail(video_id) {
     axios.get(`http://localhost:3003/details/${video_id}`).then(data => {
       this.setState({
-        details: data.data[0].description
+        details: data.data[0].text
       });
     });
   }
@@ -57,11 +55,11 @@ class App extends React.Component {
       this.setState({
         data: data.data[0]
       });
-      this.getAuthorImg(data.data[0].author, data => {
+      this.getAuthorImg(data.data[0].user_id, data => {
+        console.log(data);
         this.setState({
           authorImg: data.data.user_thumbnail
         });
-        console.log("authorImg", this.state.authorImg);
       });
     });
     this.getDetail(Number(id[1]));

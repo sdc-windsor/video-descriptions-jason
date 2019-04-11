@@ -7,7 +7,7 @@ class AddComment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            comment: 'Comment',
+            text: 'Comment',
             info: ''
         }
     }
@@ -21,7 +21,7 @@ class AddComment extends React.Component {
     }
 
     componentDidMount() {
-        this.getUserInfo('5c8b1feba0a0f7484fb97005');
+        this.getUserInfo(1);
     }
 
     render() {
@@ -32,7 +32,7 @@ class AddComment extends React.Component {
                 </div>
                 <div style={{ paddingLeft: '2em', flex: 'auto' }}>
                     <div>Add a new Comment</div>
-                    <textarea style={{ width: '100%', height: '5em' }} value={this.props.comment} onChange={(event) => { this.props.updateInput(event.target.value) }}></textarea>
+                    <textarea style={{ width: '100%', height: '5em' }} value={this.props.text} onChange={(event) => { this.props.updateInput(event.target.value) }}></textarea>
                     <div><Button color="info" style={{ padding: "5px" }}
                         onClick={() => {
                             let id = window.location.pathname;

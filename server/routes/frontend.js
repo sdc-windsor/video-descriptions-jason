@@ -6,8 +6,7 @@ const { getDescription, getUser, getUserId, getCommentsForVideo, getAllDescripti
 
 /* These are the routes utilized by the frontend.
 I have chosen to keep them independent from the CRUD API
-routes because their names and structure is not
-entirely intuitive/standardized. */
+routes because their names and structure are not intuitive/standardized. */
 
 /* ROUTE 1
 Retrieves a description record by video_id.

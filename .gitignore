@@ -29,3 +29,6 @@ data/
 data/comments.csv
 data/descriptions.csv
 data/users.csv
+
+# Env variables
+.env
