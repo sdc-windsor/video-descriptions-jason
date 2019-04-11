@@ -27,7 +27,7 @@ class Comment extends React.Component {
     }
 
     componentDidMount() {
-        this.getUserInfo(this.props.userInfo.user_id);
+        this.getUserInfo(this.props.userInfo.userId);
         this.getTimeDifference(this.props.userInfo.date)
     }
 
@@ -37,7 +37,7 @@ class Comment extends React.Component {
                 <img src={this.state.info.user_thumbnail} style={userThumbNail} />
                 <div style={{ display: 'inline', padding: '1em', fontWeight: 'bold' }}>{this.state.info.username}</div>
                 <div style={{ display: 'inline', padding: '1em' }}>{this.state.timeDifference}</div>
-                <div style={{ padding: '1em' }}>{this.props.userInfo.comment}</div>
+                <div style={{ padding: '1em' }}>{this.props.userInfo.text}</div>
 
             </div>
         )
