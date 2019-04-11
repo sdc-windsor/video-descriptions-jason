@@ -25,10 +25,12 @@ build/
 dist/
 
 # Data
-data/
 data/comments.csv
 data/descriptions.csv
 data/users.csv
+data-test/comments.csv
+data-test/descriptions.csv
+data-test/users.csv
 
 # Env variables
 .env
