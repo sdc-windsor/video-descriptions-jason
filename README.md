@@ -1,6 +1,6 @@
 # Vimeo: Video Descriptions
 
-> The Video Descriptions service for a Vimeo mock, using microservices architecture (as opposed to monolithic architecture). It depends on the existence of related Vimeo services, namely the Video Player and Video Recommendation services. This README was authored by the expander and optimizer of the backend, not by the creator of the frontend. Hence, it focuses on backend functionality.
+> This Video Descriptions repo is one component of a larger Vimeo mock, which utilizes microservices architecture. It depends on the existence of related Vimeo services, namely the Video Player and Video Recommendation services. This README was authored by the expander and optimizer of the backend, not by the creator of the frontend. Hence, it focuses on backend functionality.
 
 ## Related Projects
 
@@ -23,7 +23,44 @@
 
 - Node 11.12.0
 - PostgreSQL 11
-- A .env file with environmental variables for testing, development, and production.
+- A .env file with environmental variables for testing, development, and production. Here's an example:
+```env
+# Development
+PORT_DEV=3003
+DATA_DEV='../data'
+DESCRIPTIONS_QTY_DEV=10000000
+USERS_QTY_DEV=100000
+
+PG_HOST_DEV='localhost'
+PG_USER_DEV='postgres'
+PG_DB_DEV='sdc'
+PG_PASSWORD_DEV='postgres'
+PG_PORT_DEV=5432
+
+# Testing
+PORT_TEST=3003
+DATA_TEST='../data-test'
+DESCRIPTIONS_QTY_TEST=100
+USERS_QTY_TEST=10
+
+PG_HOST_TEST='localhost'
+PG_USER_TEST='postgres'
+PG_DB_TEST='test'
+PG_PASSWORD_TEST='postgres'
+PG_PORT_TEST=5432
+
+# Production
+PORT=3003
+DATA='../data'
+DESCRIPTIONS_QTY=10000000
+USERS_QTY=100000
+
+PG_HOST='localhost'
+PG_USER='postgres'
+PG_DB='test'
+PG_PASSWORD='postgres'
+PG_PORT=5432
+```
 
 ### Installing Dependencies
 
