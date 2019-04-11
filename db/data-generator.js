@@ -47,6 +47,7 @@ const fakeCategories = () => {
   let qty = Math.floor(Math.random() * 3 + 1);
   for (let i = 0; i < qty; i ++) {
     let index = Math.floor(Math.random() * categoriesCopy.length);
+    // Splicing ensures that the same category isn't added more than once
     results.push(categoriesCopy.splice(index, 1)[0]);
   }
   return results;
@@ -110,10 +111,17 @@ const generateComments = (videoQty, userQty) => {
   console.log('All comments have been generated!');
 }
 
+/* By default, invoking generateData will create 10M primary records. */
 const generateData = (videoQty = 10000000, userQty = 100000) => {
   generateDescriptions(videoQty);
-  // generateUsers(userQty);
-  // generateComments(videoQty, userQty);
+  generateUsers(userQty);
+  generateComments(videoQty, userQty);
 }
 
-generateData();
+/*
+Data only needs to be generated once! And the files created are humongous!
+Running the generateData function will overwrite the descriptions/comments/users
+.csv files in the data directory (or the data-test directory if NODE_ENV=test)
+*/
+
+// generateData();
