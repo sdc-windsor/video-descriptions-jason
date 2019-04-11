@@ -12,6 +12,7 @@ const dev = {
   data: process.env.DATA_DEV,
   descriptions: process.env.DESCRIPTIONS_QTY_DEV,
   users: process.env.USERS_QTY_DEV,
+  newRelicKey: process.env.NEW_RELIC_DEV,
   pg: {
     host: process.env.PG_HOST_DEV,
     user: process.env.PG_USER_DEV,
@@ -40,6 +41,7 @@ const prod = {
   data: process.env.DATA,
   descriptions: process.env.DESCRIPTIONS_QTY,
   users: process.env.USERS_QTY,
+  newRelicKey: process.env.NEW_RELIC,
   pg: {
     host: process.env.PG_HOST,
     user: process.env.PG_USER,
