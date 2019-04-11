@@ -62,4 +62,4 @@ module.exports = seed = async () => {
   await seedFromCSV(Comment, 'comments');
 }
 
-// seed();
+seed();
