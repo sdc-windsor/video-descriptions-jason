@@ -58,8 +58,8 @@ const seedFromCSV = async (Model, table) => {
 /* Combines seeding functions into one */
 module.exports = seed = async () => {
   await seedFromCSV(User, 'users');
-  // await seedFromCSV(Description, 'descriptions');
-  // await seedFromCSV(Comment, 'comments');
+  await seedFromCSV(Description, 'descriptions');
+  await seedFromCSV(Comment, 'comments');
 }
 
 seed();
