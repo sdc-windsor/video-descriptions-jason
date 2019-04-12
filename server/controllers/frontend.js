@@ -12,6 +12,7 @@ exports.getDescription = (req, res) => {
     res.json(description);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -24,6 +25,7 @@ exports.getUser = (req, res) => {
     res.json(user);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -36,6 +38,7 @@ exports.getUserId = (req, res) => {
     res.json(user.id);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -48,6 +51,7 @@ exports.getCommentsForVideo = (req, res) => {
     res.json(comments);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -62,6 +66,7 @@ exports.getAllDescriptions = (req, res) =>  {
     res.json(description);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
