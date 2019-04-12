@@ -13,6 +13,7 @@ exports.readAll = (Model, req, res) => {
     res.json(results);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -25,6 +26,7 @@ exports.readOne = (Model, req, res) => {
     res.json(result);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -32,14 +34,13 @@ exports.readOne = (Model, req, res) => {
 /* Creates one record and sends it
 back to the client. */
 exports.create = (Model, req, res) => {
-  console.log(req.body);
   return Model.create(req.body)
   .then(newRecord => {
-    console.log(newRecord);
     res.status(201);
     res.json(newRecord);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -53,6 +54,7 @@ exports.update = (Model, req, res) => {
     res.json(numUpdated);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
@@ -65,6 +67,7 @@ exports.deleteRecord = (Model, req, res) => {
     res.json(numDeleted);
   })
   .catch(err => {
+    res.status(500);
     res.json(err);
   });
 }
