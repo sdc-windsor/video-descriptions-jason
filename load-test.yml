@@ -1,9 +1,13 @@
 config:
   target: 'http://localhost:3003'
   phases:
-    - duration: 60
-      arrivalRate: 250
+    - duration: 5
+      arrivalRate: 2
 scenarios:
+  - name: "Deliver static assets & make get request for 1 video"
+    flow:
+      - get:
+          url: "/5"
   - name: "Get 1 description"
     flow:
       - get:
