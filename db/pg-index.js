@@ -7,6 +7,15 @@ const sequelize = new Sequelize(database, user, password, {
   logging: false
 });
 
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('PostgreSQL connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 const Description = sequelize.define('description',
   {
     videoId: Sequelize.INTEGER,

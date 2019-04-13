@@ -24,7 +24,6 @@ app.use('/api/comments', require('./routes/comments.js'));
 app.use('/api/descriptions', require('./routes/descriptions.js'));
 app.use('/api/users', require('./routes/users.js'));
 
-/* TODO: Refactor to use env variable */
 const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 module.exports = server;
