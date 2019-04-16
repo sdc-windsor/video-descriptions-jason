@@ -1,19 +1,22 @@
 config:
   target: 'http://localhost:3003'
   phases:
-    - duration: 5
-      arrivalRate: 2
+    - duration: 10
+      arrivalRate: 200
+  processor: "./load-funcs.js"
 scenarios:
   - name: "Deliver static assets & make get request for 1 video"
     flow:
+      - function: "generateTestVars"
       - get:
-          url: "/5"
+          url: "/{{ id }}"
   - name: "Get 1 description"
     flow:
+      - function: "generateTestVars"
       - get:
           url: "/api/descriptions"
           qs:
-            id: 5
+            id: {{ id }}
   - name: "Get paginated descriptions"
     flow:
       - get:
@@ -23,10 +26,11 @@ scenarios:
             pageSize: 10
   - name: "Get 1 comment"
     flow:
+      - function: "generateTestVars"
       - get:
           url: "/api/comments"
           qs:
-            id: 5
+            id: {{ id }}
   - name: "Get paginated comments"
     flow:
       - get:
@@ -39,7 +43,7 @@ scenarios:
       - post:
           url: "/api/comments"
           json:
-            videoId: 1
-            text: "Incoming fire!"
+            videoId: 10000000
+            text: "Inserted by Artillery!!!"
             userId: 10
             date: "2019-02-12T00:02:05.000Z"
