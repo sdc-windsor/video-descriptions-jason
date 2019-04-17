@@ -1,10 +1,14 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: ['@babel/polyfill', __dirname + '/client/index.jsx'],
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'public')
+    },
+    node: {
+      fs: 'empty'
     },
     module: {
       rules: [
@@ -23,5 +27,6 @@ module.exports = {
           use: ['style-loader', 'css-loader'],
         }
       ]
-    }
+    },
+    plugins: [new Dotenv()]
   };

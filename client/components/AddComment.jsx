@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { userThumbNail } from '../styles';
 import { Button } from 'reactstrap';
+import config from '../config.js';
+
+const { host, port } = config;
 
 class AddComment extends React.Component {
     constructor(props) {
@@ -13,7 +16,7 @@ class AddComment extends React.Component {
     }
 
     getUserInfo(user_id) {
-        axios.get(`http://localhost:3003/usersthumbnail/${user_id}`).then((data) => {
+        axios.get(`http://${host}:${port}/usersthumbnail/${user_id}`).then((data) => {
             this.setState({
                 info: data.data
             })

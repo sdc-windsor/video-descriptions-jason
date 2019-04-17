@@ -7,6 +7,9 @@ import IconTab from "./components/IconTab.jsx";
 import LineDivider from "./components/LineDivider.jsx";
 import DetailCom from "./components/DetailCom.jsx";
 import CommentsList from "./components/CommentsList.jsx";
+import config from './config.js';
+
+const { host, port } = config;
 
 class App extends React.Component {
   constructor(props) {
@@ -22,14 +25,14 @@ class App extends React.Component {
 
   /* Given a user name, returns the thumbnail for that user */
   getAuthorImg(userId = 1, cb) {
-    axios.get(`http://localhost:3003/usersthumbnail/${userId}`)
+    axios.get(`http://${host}:${port}/usersthumbnail/${userId}`)
       .then(data => {
         cb(data);
       });
   }
 
   getDetail(video_id) {
-    axios.get(`http://localhost:3003/details/${video_id}`).then(data => {
+    axios.get(`http://${host}:${port}/details/${video_id}`).then(data => {
       this.setState({
         details: data.data[0].text
       });
@@ -37,7 +40,7 @@ class App extends React.Component {
   }
 
   getCategories(video_id) {
-    axios.get(`http://localhost:3003/categories/${video_id}`)
+    axios.get(`http://${host}:${port}/categories/${video_id}`)
       .then(data => {
         this.setState({
           categories: data.data.categories
@@ -51,12 +54,20 @@ class App extends React.Component {
   componentDidMount() {
     let id = window.location.pathname; //  '/5/'
     id = id.split("/");
-    axios.get(`http://localhost:3001/videos/${Number(id[1])}`).then(data => {
-      this.setState({
-        data: data.data[0]
-      });
+    axios.get(`http://localhost:3001/videos/${Number(id[1])}`)
+    .then(data => {
+      if (!data) {
+        this.setState({
+          id: 1,
+          user_thumbnail: "https://s3.amazonaws.com/uifaces/faces/twitter/mighty55/128.jpg",
+          username: "Charlie21"
+        })
+      } else {
+        this.setState({
+          data: data.data[0]
+        });
+      }
       this.getAuthorImg(data.data[0].user_id, data => {
-        console.log(data);
         this.setState({
           authorImg: data.data.user_thumbnail
         });
