@@ -23,4 +23,6 @@ const config = {
  production
 };
 
-export default config[env];
+const url = config[env].port ? `${config[env].host}:${config[env].port}` : `${config[env].host}`;
+
+export default url;

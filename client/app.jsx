@@ -7,9 +7,7 @@ import IconTab from "./components/IconTab.jsx";
 import LineDivider from "./components/LineDivider.jsx";
 import DetailCom from "./components/DetailCom.jsx";
 import CommentsList from "./components/CommentsList.jsx";
-import config from './config.js';
-
-const { host, port } = config;
+import url from './config.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,14 +23,14 @@ class App extends React.Component {
 
   /* Given a user name, returns the thumbnail for that user */
   getAuthorImg(userId = 1, cb) {
-    axios.get(`http://${host}:${port}/usersthumbnail/${userId}`)
+    axios.get(`http://${url}/usersthumbnail/${userId}`)
       .then(data => {
         cb(data);
       });
   }
 
   getDetail(video_id) {
-    axios.get(`http://${host}:${port}/details/${video_id}`).then(data => {
+    axios.get(`http://${url}/details/${video_id}`).then(data => {
       this.setState({
         details: data.data[0].text
       });
@@ -40,7 +38,7 @@ class App extends React.Component {
   }
 
   getCategories(video_id) {
-    axios.get(`http://${host}:${port}/categories/${video_id}`)
+    axios.get(`http://${url}/categories/${video_id}`)
       .then(data => {
         this.setState({
           categories: data.data.categories

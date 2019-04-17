@@ -3,9 +3,7 @@ import axios from 'axios';
 import Comment from './Comment.jsx';
 import AddComment from './AddComment.jsx';
 import descriptions from '../../videoData_json';
-import config from '../config.js';
-
-const { host, port } = config;
+import url from '../config.js';
 
 export default class CommentsList extends React.Component {
     constructor(props) {
@@ -24,7 +22,7 @@ export default class CommentsList extends React.Component {
     }
 
     getComments(video_id) {
-        axios.get(`http://${host}:${port}/comments/${video_id}`).then((data) => {
+        axios.get(`http://${url}/comments/${video_id}`).then((data) => {
             this.setState({
                 userInfo: data.data.map((ele) => {
                     return ele
@@ -41,7 +39,7 @@ export default class CommentsList extends React.Component {
             date: new Date()
         }
 
-        axios.post(`http://${host}:${port}/comments/${video_id}`, data).then(() => {
+        axios.post(`http://${url}/comments/${video_id}`, data).then(() => {
             let id = window.location.pathname;
             id = id.split('/');
             this.setState({

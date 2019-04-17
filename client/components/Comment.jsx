@@ -2,9 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { userThumbNail } from '../styles';
 import { distanceInWordsStrict } from 'date-fns';
-import config from '../config.js';
-
-const { host, port } = config;
+import url from '../config.js';
 
 class Comment extends React.Component {
     constructor(props) {
@@ -16,7 +14,7 @@ class Comment extends React.Component {
     }
 
     getUserInfo(user_id) {
-        axios.get(`http://${host}:${port}/usersthumbnail/${user_id}`).then((data) => {
+        axios.get(`http://${url}/usersthumbnail/${user_id}`).then((data) => {
             this.setState({
                 info: data.data
             })

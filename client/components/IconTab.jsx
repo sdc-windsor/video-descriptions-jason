@@ -6,10 +6,7 @@ import IoSocialBufferOutline from 'react-icons/lib/io/social-buffer-outline';
 import MdChatBubbleOutline from 'react-icons/lib/md/chat-bubble-outline';
 import IoIosPaperplaneOutline from 'react-icons/lib/io/ios-paperplane-outline';
 import axios from 'axios';
-import config from '../config.js';
-
-const { host, port } = config;
-
+import url from '../config.js';
 
 class IconTab extends React.Component {
     constructor(props) {
@@ -90,7 +87,7 @@ class IconTab extends React.Component {
     }
 
     getNumOfComments(video_id) {
-        axios.get(`http://${host}:${port}/comments/${video_id}`).then((data) => {
+        axios.get(`http://${url}/comments/${video_id}`).then((data) => {
             this.setState({
                 numOfComments: data.data.length
             })
@@ -98,7 +95,7 @@ class IconTab extends React.Component {
     }
 
     getNumOfLikes(video_id) {
-        axios.get(`http://${host}:${port}/categories/${video_id}`).then((data) => {
+        axios.get(`http://${url}/categories/${video_id}`).then((data) => {
             this.setState({
                 numOfLikes: data.data.likes
             })
