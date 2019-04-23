@@ -19,7 +19,7 @@ app.use(express.static('public'));
 app.use('/:id', express.static('public'));
 
 /* Caching */
-// app.use('/', cache);
+app.use('/', cache);
 
 /* Routes expected by frontend */
 app.use('/', require('./routes/frontend.js'));
