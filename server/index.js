@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { port } = require('../config.js');
 const { sequelize } = require('../db/pg-index.js');
+const { cache } = require('./redis.js');
 
 app.use(compression());
 app.use(bodyParser.json());
@@ -17,6 +18,8 @@ app.use(cors());
 app.use(express.static('public'));
 app.use('/:id', express.static('public'));
 
+/* Caching */
+app.use('/', cache);
 
 /* Routes expected by frontend */
 app.use('/', require('./routes/frontend.js'));

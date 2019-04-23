@@ -1,3 +1,5 @@
+const { client } = require('../redis.js');
+
 /* Generic CRUD controllers for all models.
 The applicable Sequelize model must be passed in
 as the first argument. */
@@ -11,9 +13,9 @@ exports.readAll = (Model, req, res) => {
   return Model.findAll({ offset, limit })
   .then(results => {
     res.json(results);
+    client.set(req.originalUrl, JSON.stringify(results));
   })
   .catch(err => {
-    res.status(500);
     res.json(err);
   });
 }
@@ -24,9 +26,9 @@ exports.readOne = (Model, req, res) => {
   return Model.findOne({where: { id }})
   .then(result => {
     res.json(result);
+    client.set(req.originalUrl, JSON.stringify(result));
   })
   .catch(err => {
-    res.status(500);
     res.json(err);
   });
 }
@@ -40,7 +42,6 @@ exports.create = (Model, req, res) => {
     res.json(newRecord);
   })
   .catch(err => {
-    res.status(500);
     res.json(err);
   });
 }
@@ -54,7 +55,6 @@ exports.update = (Model, req, res) => {
     res.json(numUpdated);
   })
   .catch(err => {
-    res.status(500);
     res.json(err);
   });
 }
@@ -67,7 +67,6 @@ exports.deleteRecord = (Model, req, res) => {
     res.json(numDeleted);
   })
   .catch(err => {
-    res.status(500);
     res.json(err);
   });
 }
