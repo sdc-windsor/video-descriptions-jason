@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { Description } = require ('../../db/pg-index.js');
 const { readAll, readOne, create, update, deleteRecord } = require('../controllers/crud.js');
+const redis = require('redis');
+const client = redis.createClient();
 
 /* CRUD routes for the descriptions endpoint */
 
