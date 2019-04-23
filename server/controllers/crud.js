@@ -12,7 +12,6 @@ exports.readAll = (Model, req, res) => {
 
   return Model.findAll({ offset, limit })
   .then(results => {
-    console.log(results);
     res.json(results);
     client.set(req.originalUrl, JSON.stringify(results));
   })

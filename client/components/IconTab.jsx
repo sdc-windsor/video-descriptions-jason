@@ -20,7 +20,6 @@ class IconTab extends React.Component {
     }
 
     shortenNum(num) {
-        console.log('num', num);
         const stringifiedNum = typeof num === 'string' ? num : JSON.stringify(num);
         if (stringifiedNum.length >= 7 && stringifiedNum.length < 10) {
             const milDigit = stringifiedNum.slice(0, stringifiedNum.length - 4);
@@ -89,7 +88,6 @@ class IconTab extends React.Component {
 
     getNumOfComments(video_id) {
         axios.get(`http://${url}/comments/${video_id}`).then((data) => {
-            console.log('getNumOfComments', data)
             this.setState({
                 numOfComments: data.data.length
             })
