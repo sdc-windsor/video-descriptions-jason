@@ -12,7 +12,6 @@ exports.getDescription = (req, res) => {
   return Description.findOne({ where: { video_id }})
   .then(description => {
     res.json(description);
-    console.log('getDescription', req.originalUrl);
     client.set(req.originalUrl, JSON.stringify(description));
   })
   .catch(err => {
@@ -27,7 +26,6 @@ exports.getUser = (req, res) => {
   User.findOne({where: { id }})
   .then(user => {
     res.json(user);
-    console.log('getUser', req.originalUrl);
     client.set(req.originalUrl, JSON.stringify(user));
   })
   .catch(err => {
@@ -42,7 +40,6 @@ exports.getUserId = (req, res) => {
   User.findOne({where: { username }})
   .then(user => {
     res.json(user.id);
-    console.log('getUserId', req.originalUrl);
     client.set(req.originalUrl, JSON.stringify(user.id));
   })
   .catch(err => {
@@ -57,7 +54,6 @@ exports.getCommentsForVideo = (req, res) => {
   Comment.findAll({where: { video_id }, order: [['date','DESC']]})
   .then(comments => {
     res.json(comments);
-    console.log('getCommentsForVideo', req.originalUrl);
     client.set(req.originalUrl, JSON.stringify(comments));
   })
   .catch(err => {
@@ -74,7 +70,6 @@ exports.getAllDescriptions = (req, res) =>  {
   return Description.findAll({ where: { video_id }})
   .then(description => {
     res.json(description);
-    console.log('getAllDescriptions', req.originalUrl);
     client.set(req.originalUrl, JSON.stringify(description));
   })
   .catch(err => {
