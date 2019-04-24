@@ -14,6 +14,7 @@ const cache = (req, res, next) => {
   client.get(url, function (err, data) {
     if (err) throw err;
     if (data) {
+      console.log('Sending from cache!')
       data = JSON.parse(data);
       res.json(data);
     } else {
