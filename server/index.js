@@ -15,8 +15,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 /* Static asset middleware */
-app.use(express.static('public'));
-app.use('/:id', express.static('public'));
+app.use(express.static('public', {
+  maxAge: '1d'
+}));
+
+app.use('/:id', express.static('public', {
+  maxAge: '1d'
+}));
 
 /* Caching */
 app.use('/', cache);
