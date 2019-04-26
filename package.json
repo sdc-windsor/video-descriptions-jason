@@ -36,7 +36,6 @@
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.13",
     "net": "^1.0.2",
-    "newrelic": "^5.6.3",
     "node-config": "0.0.2",
     "nodemon": "^1.18.9",
     "pg": "^7.9.0",
